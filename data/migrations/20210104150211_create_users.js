@@ -5,7 +5,7 @@ exports.up = function (knex) {
             table.increments();
             table.string('username', 128).notNullable();
             table.string('password', 128).notNullable();
-            table.string('phone-number', 128).unique().notNullable();       
+            table.string('phone_number', 128).unique().notNullable();       
         })
 };
 
