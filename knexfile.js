@@ -4,8 +4,15 @@ module.exports = {
 
   development: {
     client: 'sqlite3',
+    useNullAsDefault: true,
     connection: {
-      filename: './dev.sqlite3'
+      filename: './water-my-plants.sqlite3'
+    },
+    migrations: {
+      directory: './data/migrations'
+    }, 
+    seed: {
+      directory: './data/seeds'
     }
   },
 
