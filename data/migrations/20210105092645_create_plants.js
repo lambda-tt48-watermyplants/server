@@ -8,6 +8,9 @@ exports.up = function (knex) {
             table.string('h2o_frequency', 129).notNullable();
             table.string('plant_image').notNullable();
             table.string('group', 129).notNullable();
+            table.string('instructions', 129).notNullable();
+            table.string('last_water', 129).notNullable();
+            table.string('next_water', 129).notNullable();
         });
 };
 
