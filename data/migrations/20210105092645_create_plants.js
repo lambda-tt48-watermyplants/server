@@ -5,12 +5,12 @@ exports.up = function (knex) {
             table.increments();
             table.string('nickname', 129).notNullable();
             table.string('species', 129).notNullable();
-            table.string('h2o_frequency', 129).notNullable();
-            table.string('plant_image').notNullable();
+            table.string('h2oFrequency', 129).notNullable();
+            table.string('plantImage').notNullable();
             table.string('group', 129).notNullable();
             table.string('instructions', 129).notNullable();
-            table.string('last_water', 129).notNullable();
-            table.string('next_water', 129).notNullable();
+            table.string('lastWater', 129).notNullable();
+            table.string('nextWater', 129).notNullable();
         });
 };
 
