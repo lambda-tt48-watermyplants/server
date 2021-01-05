@@ -1,8 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json('These are the plants');
-})
+const Plants = require('./plant_model');
+
+router.get('/', async (req, res) => {
+    try {
+        const data = await Plants.find();
+        res.json(data);
+    } catch(err){
+        res.json({message: err.message});
+    }
+});
 
 module.exports = router;
