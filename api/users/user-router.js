@@ -19,6 +19,16 @@ router.post('/', async(req, res) => {
     } catch(err){
         res.json({message: err.message});
     }
+}); 
+
+router.get('/:id', async(req, res) => {
+    try {
+        const { id } = req.params; 
+        const data = await Users.findBy(id);
+        res.json(data);
+    } catch(err) {
+        res.json({message: err.message});
+    }
 })
 
 module.exports = router;
