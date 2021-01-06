@@ -4,6 +4,7 @@ module.exports = {
     find,
     insert,
     findBy,
+    findById,
     update, 
     remove
 }
@@ -16,7 +17,11 @@ function insert(user){
     return db('users').insert(user);
 }
 
-function findBy(id){
+function findBy(filter) {
+    return db('users').where(filter).orderBy("id");
+}
+
+function findById(id){
     return db('users').where('id', id)
 }
 
