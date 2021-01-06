@@ -22,9 +22,9 @@ const config = {
     },
     resave: false,
     saveUninitialized: false,
-    
+
     store: new KnexSessionStore({
-        knex: require('../data/dbConfig'), 
+        knex: require('../data/dbConfig'),
         tablename: 'session',
         sidfieldname: "sid",
         createtable: true,
@@ -41,11 +41,12 @@ server.use('/api/plants', isAuthenticated, plantsRouter);
 server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {
-    res.json({message: "Water My Plants"});
+    res.json({ message: "Water My Plants" });
 });
 
+//Checks if user is logged to be able to access certain routes
 function isAuthenticated(req, res, next) {
-    if(req.session && req.session.user){
+    if (req.session && req.session.user) {
         next();
     } else {
         res.status(401).json({ message: 'you do not have access' });

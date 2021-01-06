@@ -17,3 +17,7 @@ BASE URL: https://water-my-plants-tt-webft-48.herokuapp.com
 | GET    | /api/users/:id                   | Returns user object by id                         |
 | PUT    | /api/users/:id                   | Updates user; returns new user object             |
 | DELETE | /api/users/:id                   | Deletes user; returns number of deleted users     |
+
+| POST   | /api/auth/register               | Creates user; returns new user object and token   |
+| POST   | /api/auth/login                  | Authenticates user; returns user object and token |
+| GET    | /api/auth/logout                 | Destroys session logging out the user             |
