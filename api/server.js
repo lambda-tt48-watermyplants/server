@@ -37,11 +37,19 @@ server.use(helmet());
 server.use(express.json());
 server.use(cors());
 server.use('/api/users', userRouter);
-server.use('/api/plants', plantsRouter);
+server.use('/api/plants', isAuthenticated, plantsRouter);
 server.use('/api/auth', authRouter);
 
 server.get('/', (req, res) => {
     res.json({message: "Water My Plants"});
 });
+
+function isAuthenticated(req, res, next) {
+    if(req.session && req.session.user){
+        next();
+    } else {
+        res.status(401).json({ message: 'you do not have access' });
+    }
+}
 
 module.exports = server;

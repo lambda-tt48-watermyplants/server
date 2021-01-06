@@ -48,7 +48,7 @@ router.delete('/:id', async(req, res) => {
         const data = await Plants.remove(id);
         res.json(data);
     } catch(err){
-        res.json({message: err.message})
+        res.json({message: err.message});
     }
 })
 
