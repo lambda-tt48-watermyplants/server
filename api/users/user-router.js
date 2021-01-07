@@ -12,14 +12,14 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    try {
-        const data = await Users.insert(req.body);
-        res.json(data);
-    } catch (err) {
-        res.json({ message: err.message });
-    }
-});
+// router.post('/', async (req, res) => {
+//     try {
+//         const data = await Users.insert(req.body);
+//         res.json(data);
+//     } catch (err) {
+//         res.json({ message: err.message });
+//     }
+// });
 
 router.get('/:id', async (req, res) => {
     try {

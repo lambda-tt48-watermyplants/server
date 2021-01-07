@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
+        req.body.user_post_id = req.session.user.user_id
         const data = await Plants.insert(req.body);
         res.json(data);
     } catch (err) {

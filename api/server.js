@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
+const jwt = require('jsonwebtoken');
 
 const KnexSessionStore = require('connect-session-knex')(session);
 
@@ -46,10 +47,19 @@ server.get('/', (req, res) => {
 
 //Checks if user is logged to be able to access certain routes
 function isAuthenticated(req, res, next) {
-    if (req.session && req.session.user) {
-        next();
+    const token = req.headers.authorization;
+    const secret = process.env.JWT_SECRET || 'foo';
+    if (token) {
+        jwt.verify(token, secret, (err, decodedToken) => {
+            if(err){
+                res.status(401).json({ message: 'you do not have access' });
+            } else {
+                req.jwt = decodedToken;
+                next();
+            }
+        })
     } else {
-        res.status(401).json({ message: 'you do not have access' });
+        res.status(401).json({ message: 'You do not have a token' });
     }
 }
 

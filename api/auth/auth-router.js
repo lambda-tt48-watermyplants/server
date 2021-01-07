@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../users/user-model');
 const router = express.Router();
 
@@ -40,6 +41,20 @@ const checkUsernameExists = async (req, res, next) => {
     }
 }
 
+const makeJwt = (user) => {
+    const payload = { 
+        username: user.username, 
+        id: user.id
+    }
+    const config = {
+        jwtSecret: process.env.JWT_SECRET || 'foo'
+    }
+    const option = { 
+        expiresIn: '2 hours'
+    }
+    return jwt.sign(payload, config.jwtSecret, option);
+}
+
 router.post('/register', checkPayload, checkUsernameUnique, async (req, res) => {
     try {
         const hash = bcrypt.hashSync(req.body.password, 10);
@@ -56,7 +71,8 @@ router.post('/login', checkPayload, checkUsernameExists, (req, res) => {
         const verifies = bcrypt.compareSync(req.body.password, req.userData.password);
         if (verifies) {
             req.session.user = req.userData
-            res.json(`Welcome back, ${req.userData.username}`)
+            const token = makeJwt(req.session.user);
+            res.json(`Welcome back, ${req.userData.username}, ${token}`);
         } else {
             res.status(401).json('bad credentials')
         }

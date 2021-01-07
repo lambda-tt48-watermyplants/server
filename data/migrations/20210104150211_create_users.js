@@ -17,7 +17,7 @@ exports.up = function (knex) {
             table.string('instructions', 129).notNullable();
             table.string('lastWater', 129).notNullable();
             table.string('nextWater', 129).notNullable();
-            table.integer('id_user')
+            table.integer('user_post_id')
             .unsigned()
             .references('user_id').inTable('users')
             .onDelete('RESTRICT').onUpdate('RESTRICT')
@@ -26,5 +26,6 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
     return knex.schema
-    .dropTableIfExists('users');
+    .dropTableIfExists('plants')
+    .dropTableIfExists('users')
 };
